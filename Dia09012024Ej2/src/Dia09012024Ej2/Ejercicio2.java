@@ -17,7 +17,73 @@ public class Ejercicio2 {
 	*/
 		public static void main(String[] args) {
 			Scanner sc = new Scanner(System.in);
+	        int[] ids = {1, 2};
+	        int[] contraseñas = {2233, 5665};
+	        double[] saldos = {900.50, 650.50};
 
+	        System.out.println("Cajero automático");
+	        System.out.println("Introduce tu ID: ");
+	        int id = sc.nextInt();
+	        System.out.println("Introduce tu contraseña: ");
+	        int contraseña = sc.nextInt();
+
+	        int autenticado = -1;
+
+	       
+	        for (int i = 0; i < ids.length; i++) {
+	            if (id == ids[i] && contraseña == contraseñas[i]) { 
+	                autenticado = i;
+	                break; 
+	            }
+	        }
+
+	        if (autenticado == -1) {
+	            System.out.println("Datos incorrectos");
+	            sc.close();
+	            return;
+	        }
+	        
+	      
+	        int opcion;
+	        do {
+	            System.out.println("1) Ver saldo");
+	            System.out.println("2) Depositar dinero");
+	            System.out.println("3) Retirar dinero");
+	            System.out.println("4) Salir");
+	            System.out.print("Elige una opción: ");
+	            opcion = sc.nextInt();
+
+	            switch (opcion) {
+	                case 1:
+	                    System.out.println("Tu saldo actual es: " + saldos[autenticado]);
+	                    break;
+	                case 2:
+	                    System.out.print("Cantidad a depositar: ");
+	                    double depositar = sc.nextDouble();
+	                    saldos[autenticado] += depositar; 
+	                    System.out.println("Dinero depositado correctamente, saldo  " + saldos[autenticado]);
+	                    break;
+	                case 3:
+	                    System.out.print("Cantidad a retirar: ");
+	                    double retirar = sc.nextDouble();
+
+	                  
+	                    if (retirar <= saldos[autenticado]) {
+	                        saldos[autenticado] -= retirar;
+	                        System.out.println(" Retirado correctamente, saldo actualizado " + saldos[autenticado]);
+	                    } else {
+	                        System.out.println(" No tiene suficiente saldo ");
+	                    }
+	                    break;
+	                case 4:
+	                    System.out.println("Saliendo del cajero");
+	                    break;
+	                default:
+	                    System.out.println("Opción no válida.");
+	            }
+	        } while (opcion != 4);
+
+	        sc.close();
 	}
 
 }
